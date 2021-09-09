@@ -1,0 +1,13 @@
+﻿@model EmployeeDetailsViewModel
+
+<h1>@Model.PageTitle</h1>
+<h2>@Model.EmployeeName</h2>
+<p>@Model.ImagePath</p>
+<img src="@Model.ImagePath">
+@if(Model.Test) { <p> Test </p> } else { <p></p> };
+
+<a asp-controller="employee" asp-action="edit" asp-route-id="@Model.Id">Edit</a>
+
+
+
+

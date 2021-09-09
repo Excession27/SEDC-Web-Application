@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ProductDTO>
+
+<h1>@ViewBag.Title</h1>
+
+<div class="container">
+    <a asp-controller="product" asp-action="create">Create New</a>
+    <div class="card-columns">
+        @foreach (var product in Model)
+        {
+
+            <div class="card card-user">
+                <img asp-append-version="true" class="card-img-top" src="@product.ImagePath" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">@product.ProductName</h4>
+                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                    <p>Size: @product.Size</p>
+                    <a asp-controller="product" asp-action="details" asp-route-id="@product.Id">See Profile</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+

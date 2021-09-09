@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CustomerDTO>
+
+<h1>@ViewBag.Title</h1>
+
+<div class="container">
+    <a asp-controller="customer" asp-action="create">Create New</a>
+    <div class="card-columns">
+        @foreach (var customer in Model)
+        {
+
+            <div class="card card-user">
+                <img asp-append-version="true" class="card-img-top" src="@customer.ImagePath" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">@customer.Name</h4>
+                    <p class="card-text">@customer.Name's default description text </p>
+                    <a asp-controller="customer" asp-action="details" asp-route-id="@customer.Id">See Profile</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+

@@ -1,0 +1,13 @@
+﻿@model ProductDetailsViewModel
+
+<h1>@Model.PageTitle</h1>
+<h2>@Model.ProductName</h2>
+<p>@Model.ImagePath</p>
+<img src="@Model.ImagePath">
+
+
+<a asp-controller="product" asp-action="edit" asp-route-id="@Model.ProductId">Edit</a>
+
+
+
+
