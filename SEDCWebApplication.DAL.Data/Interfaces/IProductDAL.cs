@@ -14,5 +14,6 @@ namespace SEDCWebApplication.DAL.Data.Interfaces
         List<Product> GetAll(int skip, int take);
 
         void Update(Product item);
+        string Delete(int id);
     }
 }

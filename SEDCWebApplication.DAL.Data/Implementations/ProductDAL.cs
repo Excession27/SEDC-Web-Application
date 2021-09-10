@@ -207,6 +207,37 @@ namespace SEDCWebApplication.DAL.Data.Implementations
             return results;
         }
 
+        public string Delete(int id)
+        {
+            SqlConnection cn = ConnectionGet();
+
+            SqlCommand cmd = CommandGet(cn);
+            cmd.CommandText = "Product_Del";
+
+            this.ParamNullableValueTypeNullableValueSet(cmd, id, "@ProductId", SqlDbType.Int);
+
+            try
+            {
+                cn.Open();
+
+                IDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Create(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                //DMLogger.Singleton.LogError(LogCategories.SECURITY, ex);
+                throw;
+            }
+            finally
+            {
+                cn.Close();
+            }
+            return "State changed to deleted";
+        }
+
 
         private void CommonParametersAdd(Product item, SqlCommand cmd)
         {

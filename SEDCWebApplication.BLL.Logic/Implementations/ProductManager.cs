@@ -42,5 +42,10 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
             product = _mapper.Map<ProductDTO>(productEntity);
             return product;
         }
+
+        public string Delete(int id)
+        {
+            return _productDAL.Delete(id);
+        }            
     }
 }

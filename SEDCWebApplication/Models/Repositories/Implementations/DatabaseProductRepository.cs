@@ -35,5 +35,10 @@ namespace SEDCWebApplication.Models.Repositories.Implementations
         {
             return _productManager.Update(product);
         }
+
+        public string Delete(int id)
+        {
+            return _productManager.Delete(id);
+        }
     }
 }

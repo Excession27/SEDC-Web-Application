@@ -11,6 +11,6 @@ namespace SEDCWebApplication.Models.Repositories.Interfaces
         IEnumerable<ProductDTO> GetAllProducts();
         ProductDTO GetProductById(int id);
         ProductDTO Add(ProductDTO product);
-        //ProductDTO Delete(int id);
+        string Delete(int id);
     }
 }

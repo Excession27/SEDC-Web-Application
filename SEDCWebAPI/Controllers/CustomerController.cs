@@ -16,52 +16,51 @@ namespace SEDCWebAPI.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class CustomerController : ControllerBase
     {
 
             
-        private readonly IProductRepository _productRepository;
+        private readonly ICustomerRepository _customerRepository;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public ProductController(IProductRepository productRepository, IWebHostEnvironment hostingEnvironment)
+        public CustomerController(ICustomerRepository customerRepository, IWebHostEnvironment hostingEnvironment)
         {
-            _productRepository = productRepository;
+            _customerRepository = customerRepository;
             _hostingEnvironment = hostingEnvironment;
 
         }
 
-        // GET: api/<ProductController>
+        // GET: api/<CustomerController>
         [HttpGet]
-        public IEnumerable<ProductDTO> Get()
+        public IEnumerable<CustomerDTO> Get()
         {
-            return _productRepository.GetAllProducts().ToList(); ;
+            return _customerRepository.GetAllCustomers().ToList(); ;
         }
 
-        // GET api/<ProductController>/5
+        // GET api/<CustomerController>/5
         [HttpGet("{id}")]
-        public ProductDTO Get(int id)
+        public CustomerDTO Get(int id)
         {
-            return _productRepository.GetProductById(id);
+            return _customerRepository.GetCustomerById(id);
         }
 
-        // POST api/<ProductController>
+        // POST api/<CustomerController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
-
         }
 
-        // PUT api/<ProductController>/5
+        // PUT api/<CustomerController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ProductController>/5
+        // DELETE api/<CustomerController>/5
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public void Delete(int id)
         {
-            return _productRepository.Delete(id);
+            
         }
     }
 }

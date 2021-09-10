@@ -41,6 +41,7 @@ namespace SEDCWebAPI
 
 
             services.AddScoped<IEmployeeRepository, DatabaseEmployeeRepository>();
+            services.AddScoped<ICustomerRepository, DatabaseCustomerRepository>();
             services.AddScoped<IProductRepository, DatabaseProductRepository>();
 
             //BLL
