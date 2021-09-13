@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SEDCWebApplication.DAL.EntityFactory.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace SEDCWebApplication.BLL.Logic.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public RoleEnum Role { get; set; }
+        public List<Order> Orders { get; set; }
         public string ImagePath { get; set; }
         public bool Test { get; set; }
 

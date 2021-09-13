@@ -10,10 +10,18 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SEDCWebApplication.BLL.Logic.Implementations;
 using SEDCWebApplication.BLL.Logic.Interfaces;
-using SEDCWebApplication.DAL.Data.Implementations;
-using SEDCWebApplication.DAL.Data.Interfaces;
+
+//  DAL
+/*using SEDCWebApplication.DAL.Data.Implementations;
+using SEDCWebApplication.DAL.Data.Interfaces;*/
+
+using SEDCWebApplication.DAL.EntityFactory.Implementation;
+using SEDCWebApplication.DAL.EntityFactory.Interfaces;
+
 using SEDCWebApplication.Models.Repositories.Implementations;
 using SEDCWebApplication.Models.Repositories.Interfaces;
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,24 +43,33 @@ namespace SEDCWebAPI
         {
             services.AddControllers();
 
+            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddAutoMapper(typeof(EmployeeManager));
-            services.AddAutoMapper(typeof(CustomerManager));
-            services.AddAutoMapper(typeof(ProductManager));
+/*            services.AddAutoMapper(typeof(CustomerManager));
+            services.AddAutoMapper(typeof(ProductManager));*/
 
 
             services.AddScoped<IEmployeeRepository, DatabaseEmployeeRepository>();
-            services.AddScoped<ICustomerRepository, DatabaseCustomerRepository>();
-            services.AddScoped<IProductRepository, DatabaseProductRepository>();
+/*            services.AddScoped<ICustomerRepository, DatabaseCustomerRepository>();
+            services.AddScoped<IProductRepository, DatabaseProductRepository>();*/
 
             //BLL
             services.AddScoped<IEmployeeManager, EmployeeManager>();
-            services.AddScoped<ICustomerManager, CustomerManager>();
-            services.AddScoped<IProductManager, ProductManager>();
+/*            services.AddScoped<ICustomerManager, CustomerManager>();
+            services.AddScoped<IProductManager, ProductManager>();*/
 
             //DAL
-            services.AddScoped<IEmployeeDAL, EmployeeDAL>();
-            services.AddScoped<ICustomerDAL, CustomerDAL>();
-            services.AddScoped<IProductDAL, ProductDAL>();
+/*            services.AddScoped<IEmployeeDAL, EmployeeDAL>();*/
+/*            services.AddScoped<ICustomerDAL, CustomerDAL>();
+            services.AddScoped<IProductDAL, ProductDAL>();*/
+
+            //EntityFramework
+            services.AddScoped<IEmployeeDAL, EmployeeRepository>();
+            /*            services.AddScoped<ICustomerDAL, CustomerRepository>();
+                        services.AddScoped<IProductDAL, ProductRepository>();*/
+
+            services.AddScoped<IOrderDAL, OrderRepository>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,

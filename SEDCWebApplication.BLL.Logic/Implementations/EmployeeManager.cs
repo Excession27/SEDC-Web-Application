@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using SEDCWebApplication.BLL.Logic.Interfaces;
 using SEDCWebApplication.BLL.Logic.Models;
-using SEDCWebApplication.DAL.Data.Entities;
-using SEDCWebApplication.DAL.Data.Interfaces;
+
+//using SEDCWebApplication.DAL.Data.Entities;
+//using SEDCWebApplication.DAL.Data.Interfaces;
+
 using System;
 using System.Collections.Generic;
-using System.Text;
+using SEDCWebApplication.DAL.EntityFactory.Interfaces;
+using SEDCWebApplication.DAL.EntityFactory.Entities;
 
 namespace SEDCWebApplication.BLL.Logic.Implementations
 {
@@ -13,9 +16,11 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
     {
         private readonly IEmployeeDAL _employeeDAL;
         private readonly IMapper _mapper;
-        public EmployeeManager(IEmployeeDAL employeeDAL, IMapper mapper)
+        private readonly IOrderDAL _orderDAL;
+        public EmployeeManager(IEmployeeDAL employeeDAL, IMapper mapper, IOrderDAL orderDAL)
         {
             _employeeDAL = employeeDAL;
+            _orderDAL = orderDAL;
             _mapper = mapper;
         }
         public EmployeeDTO Add(EmployeeDTO employee)
@@ -33,7 +38,21 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
 
         public EmployeeDTO GetEmployeeById(int id)
         {
-            return _mapper.Map<EmployeeDTO>(_employeeDAL.GetById(id));
+            try
+            {
+                Employee employee = _employeeDAL.GetById(id);
+                if (employee == null)
+                {
+                    throw new Exception($"Employee with id {id} not found.");
+                }
+                EmployeeDTO employeeDTO = _mapper.Map<EmployeeDTO>(employee);
+                employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employee.EmployeeId);
+                return employeeDTO;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public EmployeeDTO Update(EmployeeDTO employee)
         {
