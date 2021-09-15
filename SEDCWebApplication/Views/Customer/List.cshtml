@@ -11,9 +11,9 @@
             <div class="card card-user">
                 <img asp-append-version="true" class="card-img-top" src="@customer.ImagePath" alt="Card image" style="width:100%">
                 <div class="card-body">
-                    <h4 class="card-title">@customer.Name</h4>
-                    <p class="card-text">@customer.Name's default description text </p>
-                    <a asp-controller="customer" asp-action="details" asp-route-id="@customer.Id">See Profile</a>
+                    <h4 class="card-title">@customer.CustomerName</h4>
+                    <p class="card-text">@customer.CustomerName's default description text </p>
+                    <a asp-controller="customer" asp-action="details" asp-route-id="@customer.CustomerId">See Profile</a>
                 </div>
             </div>
         }

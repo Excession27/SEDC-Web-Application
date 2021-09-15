@@ -53,9 +53,9 @@ namespace SEDCWebApplication.Controllers
 
             productVM.ProductName = product.ProductName;
             productVM.UnitPrice = product.UnitPrice;
-            productVM.IsDiscounted = product.IsDiscounted;
-            productVM.IsActive = product.IsActive;
-            productVM.IsDeleted = product.IsDeleted;
+            productVM.IsDiscounted = (bool)product.IsDiscounted;
+            productVM.IsActive = (bool)product.IsActive;
+            productVM.IsDeleted = (bool)product.IsDeleted;
             productVM.Size = product.Size;
             productVM.ImagePath = product.ImagePath;
 
@@ -87,7 +87,7 @@ namespace SEDCWebApplication.Controllers
 
                 ProductDTO product = new ProductDTO
                 {
-                    Id = null,
+                    ProductId = null,
                     ProductName = model.ProductName,
                     UnitPrice = model.UnitPrice,
                     IsDiscounted = model.IsDiscounted,
@@ -97,7 +97,7 @@ namespace SEDCWebApplication.Controllers
                     ImagePath = "/img/" + uniqueFileName
                 };
                 ProductDTO newProduct = _productRepository.Add(product);
-                return RedirectToAction("Details", new { id = newProduct.Id });
+                return RedirectToAction("Details", new { id = newProduct.ProductId });
             } else
             {
                 return View();

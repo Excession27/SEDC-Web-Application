@@ -51,10 +51,10 @@ namespace SEDCWebApplication.Controllers
 
 
             EmployeeDetailsViewModel employeeVM = new EmployeeDetailsViewModel();
-            employeeVM.EmployeeName = employee.Name;
+            employeeVM.EmployeeName = employee.EmployeeName;
             employeeVM.PageTitle = "Employee's details";
             employeeVM.ImagePath = employee.ImagePath;
-            employeeVM.Id = (int)employee.Id;
+            employeeVM.Id = (int)employee.EmployeeId;
 
             return View(employeeVM);
         }
@@ -84,14 +84,13 @@ namespace SEDCWebApplication.Controllers
 
                 EmployeeDTO employee = new EmployeeDTO
                 {
-                    Id = null,
-                    Name = model.Name,
-                    Email = model.Email,
+                    EmployeeId = null,
+                    EmployeeName = model.Name,
                     Role = model.Role,
                     ImagePath = "/img/" + uniqueFileName
                 };
                 EmployeeDTO newEmployee = _employeeRepository.Add(employee);
-                return RedirectToAction("Details", new { id = newEmployee.Id });
+                return RedirectToAction("Details", new { id = newEmployee.EmployeeId });
             } else
             {
                 return View();
@@ -109,10 +108,10 @@ namespace SEDCWebApplication.Controllers
 
 
             EmployeeUpdateViewModel employeeVM = new EmployeeUpdateViewModel();
-            employeeVM.Name = employee.Name;
+            employeeVM.Name = employee.EmployeeName;
             employeeVM.PageTitle = "Edit employee's details";
             employeeVM.ImagePath = employee.ImagePath;
-            employeeVM.Id = (int)employee.Id;
+            employeeVM.Id = (int)employee.EmployeeId;
 
             
             return View(employeeVM);
@@ -138,14 +137,13 @@ namespace SEDCWebApplication.Controllers
 
                 EmployeeDTO employee = new EmployeeDTO
                 {
-                    Id = model.Id,
-                    Name = model.Name,
-                    Email = model.Email,
+                    EmployeeId = model.Id,
+                    EmployeeName = model.Name,
                     Role = model.Role,
                     ImagePath = "/img/" + uniqueFileName
                 };
                 EmployeeDTO newEmployee = _employeeRepository.Update(employee);
-                return RedirectToAction("Details", new { id = newEmployee.Id });
+                return RedirectToAction("Details", new { id = newEmployee.EmployeeId });
             }
             else
             {

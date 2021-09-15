@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
 using SEDCWebApplication.BLL.Logic.Interfaces;
 using SEDCWebApplication.BLL.Logic.Models;
-using SEDCWebApplication.DAL.Data.Entities;
-using SEDCWebApplication.DAL.Data.Interfaces;
+// ADO.net
+//using SEDCWebApplication.DAL.Data.Entities;
+//using SEDCWebApplication.DAL.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+//EntityFramework - Entity Factory
+using SEDCWebApplication.DAL.EntityFactory.Interfaces;
+using SEDCWebApplication.DAL.EntityFactory.Entities;
 
 namespace SEDCWebApplication.BLL.Logic.Implementations
 {

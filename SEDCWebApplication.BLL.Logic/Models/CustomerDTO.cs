@@ -8,12 +8,11 @@ namespace SEDCWebApplication.BLL.Logic.Models
 {
     public class CustomerDTO
     {
-        public int? Id { get; set; }
+        public int? CustomerId { get; set; }
 
         [Required(ErrorMessage = "Ime je obavezno")]
-        public string Name { get; set; }
+        public string CustomerName { get; set; }
         public int ContactId { get; set; }
-        public string Email { get; set; }
         public string ImagePath { get; set; }
 
 

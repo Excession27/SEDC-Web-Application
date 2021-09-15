@@ -9,15 +9,15 @@ namespace SEDCWebApplication.BLL.Logic.Models
 {
     public class EmployeeDTO
     {
-        public int? Id { get; set; }
+        public int? EmployeeId { get; set; }
 
         [Required(ErrorMessage = "Ime je obavezno")]
-        public string Name { get; set; }
-        public string Email { get; set; }
+        public string EmployeeName { get; set; }
         public RoleEnum Role { get; set; }
         public List<Order> Orders { get; set; }
+        public string Pol { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string ImagePath { get; set; }
         public bool Test { get; set; }
-
     }
 }

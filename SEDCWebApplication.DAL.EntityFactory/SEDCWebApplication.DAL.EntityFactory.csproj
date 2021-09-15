@@ -12,4 +12,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SEDCWebApplication.DAL.DatabaseFactory\SEDCWebApplication.DAL.DatabaseFactory.csproj" />
+  </ItemGroup>
+
 </Project>

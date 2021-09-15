@@ -49,7 +49,7 @@ namespace SEDCWebApplication.Controllers
 
 
             CustomerDetailsViewModel customerVM = new CustomerDetailsViewModel();
-            customerVM.CustomerName = customer.Name;
+            customerVM.CustomerName = customer.CustomerName;
             customerVM.PageTitle = "Customer's details";
 
             return View(customerVM);
@@ -80,13 +80,13 @@ namespace SEDCWebApplication.Controllers
 
                 CustomerDTO customer = new CustomerDTO
                 {
-                    Id = null,
-                    Name = model.Name,
+                    CustomerId = null,
+                    CustomerName = model.Name,
                     ContactId = model.ContactId,
                     ImagePath = "/img/" + uniqueFileName
                 };
                 CustomerDTO newCustomer = _customerRepository.Add(customer);
-                return RedirectToAction("Details", new { id = newCustomer.Id });
+                return RedirectToAction("Details", new { id = newCustomer.CustomerId });
             } else
             {
                 return View();

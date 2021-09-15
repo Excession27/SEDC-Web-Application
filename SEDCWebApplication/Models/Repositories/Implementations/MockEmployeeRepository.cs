@@ -16,24 +16,24 @@ namespace SEDCWebApplication.Models.Repositories.Implementations
             {
                 new EmployeeDTO
                 {
-                    Id=1,
-                    Name="Pera",
+                    EmployeeId=1,
+                    EmployeeName="Pera",
                     Role=RoleEnum.Manager,
                     ImagePath = "~/img/avatar.png",
                     Test = true
                 },
                 new EmployeeDTO
                 {
-                    Id=2,
-                    Name="Mika",
+                    EmployeeId=2,
+                    EmployeeName="Mika",
                     Role=RoleEnum.Sales,
                     ImagePath = "~/img/avatar.png",
                     Test = false
                 },
                 new EmployeeDTO
                 {
-                    Id=3,
-                    Name="Laza",
+                    EmployeeId=3,
+                    EmployeeName="Laza",
                     Role=RoleEnum.Operater,
                     ImagePath = "~/img/avatar.png"
                 }
@@ -47,14 +47,14 @@ namespace SEDCWebApplication.Models.Repositories.Implementations
 
         public EmployeeDTO GetEmployeeById(int id)
         {
-            return _employeeList.Where(x => x.Id == id).FirstOrDefault();
+            return _employeeList.Where(x => x.EmployeeId == id).FirstOrDefault();
         }
 
         public EmployeeDTO Add(EmployeeDTO employee)
         {
-            employee.Id = _employeeList.Max(e => e.Id) + 1;
+            employee.EmployeeId = _employeeList.Max(e => e.EmployeeId) + 1;
             _employeeList.Add(employee);
-            return _employeeList.Where(x => x.Id == employee.Id).FirstOrDefault();
+            return _employeeList.Where(x => x.EmployeeId == employee.EmployeeId).FirstOrDefault();
         }
 
         public EmployeeDTO Update(EmployeeDTO employee)
