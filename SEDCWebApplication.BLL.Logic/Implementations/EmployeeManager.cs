@@ -1,15 +1,21 @@
 ﻿using AutoMapper;
 using SEDCWebApplication.BLL.Logic.Interfaces;
 using SEDCWebApplication.BLL.Logic.Models;
+using System;
+using System.Collections.Generic;
+
 // ADO.net
 //using SEDCWebApplication.DAL.Data.Entities;
 //using SEDCWebApplication.DAL.Data.Interfaces;
 
-using System;
-using System.Collections.Generic;
 // EntityFramework - Entity Factory
-using SEDCWebApplication.DAL.EntityFactory.Interfaces;
-using SEDCWebApplication.DAL.EntityFactory.Entities;
+//using SEDCWebApplication.DAL.EntityFactory.Interfaces;
+//using SEDCWebApplication.DAL.EntityFactory.Entities;
+
+// EntityFramework - Database Factory
+using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
+using SEDCWebApplication.DAL.DatabaseFactory.Entities;
+
 
 namespace SEDCWebApplication.BLL.Logic.Implementations
 {
@@ -47,7 +53,7 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
                     throw new Exception($"Employee with id {id} not found.");
                 }
                 EmployeeDTO employeeDTO = _mapper.Map<EmployeeDTO>(employee);
-                employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employee.EmployeeId);
+                employeeDTO.Orders = _orderDAL.GetByEmployeeId(employee.UserId);
                 return employeeDTO;
             }
             catch (Exception ex)

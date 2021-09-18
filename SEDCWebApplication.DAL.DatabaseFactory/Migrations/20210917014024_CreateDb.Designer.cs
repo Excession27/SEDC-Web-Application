@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SEDCWebApplication.DAL.DatabaseFactory;
 
 namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210917014024_CreateDb")]
+    partial class CreateDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,9 +64,6 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                     b.Property<int>("OrderStatusId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<decimal?>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
@@ -75,8 +74,6 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.HasIndex("OrderStatusId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Orders");
                 });
@@ -94,39 +91,6 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                     b.HasKey("OrderStatusId");
 
                     b.ToTable("OrderStatus");
-                });
-
-            modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Product", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDiscounted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("ProductId");
-
-                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Role", b =>
@@ -227,10 +191,6 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.Product", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId");
-
                     b.Navigation("Customer");
 
                     b.Navigation("Employee");
@@ -258,11 +218,6 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Product", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

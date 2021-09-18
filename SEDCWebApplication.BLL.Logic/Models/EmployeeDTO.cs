@@ -1,4 +1,5 @@
-﻿using SEDCWebApplication.DAL.EntityFactory.Entities;
+﻿//using SEDCWebApplication.DAL.EntityFactory.Entities;
+using SEDCWebApplication.DAL.DatabaseFactory.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +14,7 @@ namespace SEDCWebApplication.BLL.Logic.Models
 
         [Required(ErrorMessage = "Ime je obavezno")]
         public string EmployeeName { get; set; }
-        public RoleEnum Role { get; set; }
+        public RoleEnum RoleId { get; set; }
         public List<Order> Orders { get; set; }
         public string Pol { get; set; }
         public DateTime? DateOfBirth { get; set; }

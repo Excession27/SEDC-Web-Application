@@ -7,9 +7,13 @@ using SEDCWebApplication.BLL.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
-//EntityFramework - Entity Factory
-using SEDCWebApplication.DAL.EntityFactory.Interfaces;
-using SEDCWebApplication.DAL.EntityFactory.Entities;
+// EntityFramework - Entity Factory
+//using SEDCWebApplication.DAL.EntityFactory.Interfaces;
+//using SEDCWebApplication.DAL.EntityFactory.Entities;
+
+// EntityFramework - Database Factory
+using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
+using SEDCWebApplication.DAL.DatabaseFactory.Entities;
 
 namespace SEDCWebApplication.BLL.Logic.Implementations
 {

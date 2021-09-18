@@ -86,7 +86,7 @@ namespace SEDCWebApplication.Controllers
                 {
                     EmployeeId = null,
                     EmployeeName = model.Name,
-                    Role = model.Role,
+                    RoleId = model.Role,
                     ImagePath = "/img/" + uniqueFileName
                 };
                 EmployeeDTO newEmployee = _employeeRepository.Add(employee);
@@ -139,7 +139,7 @@ namespace SEDCWebApplication.Controllers
                 {
                     EmployeeId = model.Id,
                     EmployeeName = model.Name,
-                    Role = model.Role,
+                    RoleId = model.Role,
                     ImagePath = "/img/" + uniqueFileName
                 };
                 EmployeeDTO newEmployee = _employeeRepository.Update(employee);

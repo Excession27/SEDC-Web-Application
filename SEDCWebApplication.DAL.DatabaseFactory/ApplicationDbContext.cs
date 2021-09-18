@@ -11,8 +11,13 @@ namespace SEDCWebApplication.DAL.DatabaseFactory
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
+        public DbSet<Contact> Contacts { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<Product> Products { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 

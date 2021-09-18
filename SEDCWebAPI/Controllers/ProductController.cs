@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SEDCWebApplication.BLL.Logic.Models;
 using SEDCWebApplication.DAL.Data.Entities;
 using SEDCWebApplication.Models.Repositories.Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace SEDCWebAPI.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-        public IEnumerable<ProductDTO> Get()
+        public IEnumerable<ProductDTO> GetAll()
         {
             return _productRepository.GetAllProducts().ToList(); ;
         }
