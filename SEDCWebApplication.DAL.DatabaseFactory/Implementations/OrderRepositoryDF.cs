@@ -24,6 +24,7 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
                 Order order = new Order();
+                order = item;
                 db.Orders.Add(order);
                 db.SaveChanges();
             }

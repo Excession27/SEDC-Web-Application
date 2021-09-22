@@ -16,7 +16,7 @@ namespace SEDCWebApplication.Models.Repositories.Implementations
             {
                 new EmployeeDTO
                 {
-                    EmployeeId=1,
+                    //EmployeeId=1,
                     EmployeeName="Pera",
                     RoleId=RoleEnum.Manager,
                     ImagePath = "~/img/avatar.png",
@@ -24,7 +24,7 @@ namespace SEDCWebApplication.Models.Repositories.Implementations
                 },
                 new EmployeeDTO
                 {
-                    EmployeeId=2,
+                    //EmployeeId=2,
                     EmployeeName="Mika",
                     RoleId=RoleEnum.Sales,
                     ImagePath = "~/img/avatar.png",
@@ -32,7 +32,7 @@ namespace SEDCWebApplication.Models.Repositories.Implementations
                 },
                 new EmployeeDTO
                 {
-                    EmployeeId=3,
+                    //EmployeeId=3,
                     EmployeeName="Laza",
                     RoleId=RoleEnum.Operater,
                     ImagePath = "~/img/avatar.png"

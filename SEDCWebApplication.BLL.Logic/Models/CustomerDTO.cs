@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SEDCWebApplication.DAL.DatabaseFactory.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace SEDCWebApplication.BLL.Logic.Models
         public string CustomerName { get; set; }
         public int ContactId { get; set; }
         public string ImagePath { get; set; }
+
+        public List<Order> Orders { get; set; }
 
 
     }

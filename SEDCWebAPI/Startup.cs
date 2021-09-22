@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SEDCWebAPI.Services.Implementation;
+using SEDCWebAPI.Services.Interfaces;
 using SEDCWebApplication.BLL.Logic.Implementations;
 using SEDCWebApplication.BLL.Logic.Interfaces;
 
@@ -57,16 +59,19 @@ namespace SEDCWebAPI
             services.AddAutoMapper(typeof(EmployeeManager));
             services.AddAutoMapper(typeof(CustomerManager));
             services.AddAutoMapper(typeof(ProductManager));
+            services.AddAutoMapper(typeof(UserManager));
 
 
             services.AddScoped<IEmployeeRepository, DatabaseEmployeeRepository>();
             services.AddScoped<ICustomerRepository, DatabaseCustomerRepository>();
             services.AddScoped<IProductRepository, DatabaseProductRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             //BLL
             services.AddScoped<IEmployeeManager, EmployeeManager>();
             services.AddScoped<ICustomerManager, CustomerManager>();
             services.AddScoped<IProductManager, ProductManager>();
+            services.AddScoped<IUserManager, UserManager>();
 
             //DAL
             /*            services.AddScoped<IEmployeeDAL, EmployeeDAL>();*/
@@ -84,6 +89,7 @@ namespace SEDCWebAPI
             services.AddScoped<ICustomerDAL, CustomerRepositoryDF>();
             services.AddScoped<IProductDAL, ProductRepositoryDF>();
             services.AddScoped<IOrderDAL, OrderRepositoryDF>();
+            services.AddScoped<IUserDAL, UserRepositoryDF>();
 
             /*            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                         .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,

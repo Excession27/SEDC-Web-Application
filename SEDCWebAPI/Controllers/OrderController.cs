@@ -17,52 +17,52 @@ namespace SEDCWebAPI.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class OrderController : ControllerBase
     {
 
             
-        private readonly IProductRepository _productRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public ProductController(IProductRepository productRepository, IWebHostEnvironment hostingEnvironment)
+        public OrderController(IOrderRepository orderRepository, IWebHostEnvironment hostingEnvironment)
         {
-            _productRepository = productRepository;
+            _orderRepository = orderRepository;
             _hostingEnvironment = hostingEnvironment;
 
         }
 
-        // GET: api/<ProductController>
+        // GET: api/<OrderController>
         [HttpGet]
-        public IEnumerable<ProductDTO> GetAll()
+        public IEnumerable<OrderDTO> GetAll()
         {
-            return _productRepository.GetAllProducts().ToList(); ;
+            return _orderRepository.GetAllOrders().ToList(); ;
         }
 
-        // GET api/<ProductController>/5
+        // GET api/<OrderController>/5
         [HttpGet("{id}")]
-        public ProductDTO Get(int id)
+        public OrderDTO Get(int id)
         {
-            return _productRepository.GetProductById(id);
+            return _orderRepository.GetOrderById(id);
         }
 
-        // POST api/<ProductController>
+        // POST api/<OrderController>
         [HttpPost]
-        public void Post([FromBody] ProductDTO product)
+        public void Post([FromBody] OrderDTO order)
         {
-            _productRepository.Add(product);
+            _orderRepository.Add(order);
         }
 
-        // PUT api/<ProductController>/5
+        // PUT api/<OrderController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ProductController>/5
+        // DELETE api/<OrderController>/5
         [HttpDelete("{id}")]
         public string Delete(int id)
         {
-            return _productRepository.Delete(id);
+            return _orderRepository.Delete(id);
         }
     }
 }

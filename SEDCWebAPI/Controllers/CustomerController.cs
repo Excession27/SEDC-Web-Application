@@ -46,8 +46,9 @@ namespace SEDCWebAPI.Controllers
 
         // POST api/<CustomerController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] CustomerDTO customer)
         {
+            _customerRepository.Add(customer);
         }
 
         // PUT api/<CustomerController>/5

@@ -10,8 +10,8 @@ using SEDCWebApplication.DAL.DatabaseFactory;
 namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210918015425_AddedClasses")]
-    partial class AddedClasses
+    [Migration("20210920164851_createNewDb")]
+    partial class createNewDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

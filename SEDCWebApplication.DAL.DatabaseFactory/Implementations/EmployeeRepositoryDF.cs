@@ -23,8 +23,12 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                User user = new User();
-                db.Users.Add(user);
+                if (item.Role == null)
+                {
+                    item.Role = new Role();
+                }
+                
+                db.Users.Add(item);
                 db.SaveChanges();
             }
         }

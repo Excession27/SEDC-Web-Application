@@ -17,6 +17,8 @@ using SEDCWebApplication.DAL.Data.Interfaces;
 using SEDCWebApplication.Models.Repositories.Implementations;
 using SEDCWebApplication.Models.Repositories.Interfaces;
 
+
+
 namespace SEDCWebApplication
 {
     public class Startup
@@ -48,9 +50,15 @@ namespace SEDCWebApplication
             services.AddScoped<IProductManager, ProductManager>();
 
             //DAL
-            services.AddScoped<IEmployeeDAL, EmployeeDAL>();
-            services.AddScoped<ICustomerDAL, CustomerDAL>();
-            services.AddScoped<IProductDAL, ProductDAL>();
+            //services.AddScoped<IEmployeeDAL, EmployeeDAL>();
+            //services.AddScoped<ICustomerDAL, CustomerDAL>();
+            //services.AddScoped<IProductDAL, ProductDAL>();
+
+            // Database Factory
+            services.AddScoped<SEDCWebApplication.DAL.DatabaseFactory.Interfaces.IEmployeeDAL, SEDCWebApplication.DAL.DatabaseFactory.Implementations.EmployeeRepositoryDF>();
+            services.AddScoped<SEDCWebApplication.DAL.DatabaseFactory.Interfaces.ICustomerDAL, SEDCWebApplication.DAL.DatabaseFactory.Implementations.CustomerRepositoryDF>();
+            services.AddScoped<SEDCWebApplication.DAL.DatabaseFactory.Interfaces.IProductDAL, SEDCWebApplication.DAL.DatabaseFactory.Implementations.ProductRepositoryDF>();
+            services.AddScoped<SEDCWebApplication.DAL.DatabaseFactory.Interfaces.IOrderDAL, SEDCWebApplication.DAL.DatabaseFactory.Implementations.OrderRepositoryDF>();
 
         }
 

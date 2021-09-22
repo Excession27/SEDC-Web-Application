@@ -23,8 +23,15 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                User user = new User();
-                db.Users.Add(user);
+                
+                // Prepraviti da radi kako treba, privremeno 
+                if (item.Contact == null)
+                {
+                    item.Contact = new Contact();
+                }                                                                   
+                
+                
+                db.Customers.Add(item);
                 db.SaveChanges();
             }
         }

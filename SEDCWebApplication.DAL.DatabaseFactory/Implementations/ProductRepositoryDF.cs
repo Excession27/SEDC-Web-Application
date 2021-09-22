@@ -24,6 +24,7 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
                 Product product = new Product();
+                product = item;
                 db.Products.Add(product);
                 db.SaveChanges();
             }

@@ -30,7 +30,7 @@ namespace SEDCWebApplication.Controllers
 
         }
 
-
+        [HttpGet]
         [Route("List")]
         public IActionResult List()
         {
@@ -41,6 +41,7 @@ namespace SEDCWebApplication.Controllers
             return View(products);
         }
 
+        [HttpGet]
         [Route("DetailsView/{id}")]
         public IActionResult Details(int id)
         {

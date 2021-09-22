@@ -30,18 +30,32 @@ namespace SEDCWebApplication.BLL.Logic
                         CreateMap<Product, ProductDTO>();*/
 
 
-            CreateMap<DAL.EntityFactory.Entities.Employee, EmployeeDTO>();          
-                            //.ForMember(dest => dest.Role, src => src.MapFrom(src => src.RoleId));
+            // Entity Factory
+            //CreateMap<DAL.EntityFactory.Entities.Employee, EmployeeDTO>();          
+                            
 
-            CreateMap<EmployeeDTO, DAL.EntityFactory.Entities.Employee>()          
-                //.ForMember(dest => dest.RoleId, src => src.MapFrom(src => src.Role))
-                .ForMember(dest => dest.Role, src => src.Ignore());
+            //CreateMap<EmployeeDTO, DAL.EntityFactory.Entities.Employee>()          
+                //.ForMember(dest => dest.Role, src => src.Ignore());
 
-            CreateMap<CustomerDTO, DAL.EntityFactory.Entities.Customer>();
-            CreateMap<DAL.EntityFactory.Entities.Customer, CustomerDTO>();
+            //CreateMap<CustomerDTO, DAL.EntityFactory.Entities.Customer>();
+            //CreateMap<DAL.EntityFactory.Entities.Customer, CustomerDTO>();
 
-            CreateMap<ProductDTO, DAL.EntityFactory.Entities.Product>();
-            CreateMap<DAL.EntityFactory.Entities.Product, ProductDTO>();
+            //CreateMap<ProductDTO, DAL.EntityFactory.Entities.Product>();
+            //CreateMap<DAL.EntityFactory.Entities.Product, ProductDTO>();
+
+            //Database Factory
+            CreateMap<CustomerDTO, DAL.DatabaseFactory.Entities.Customer>();
+            CreateMap<DAL.DatabaseFactory.Entities.Customer, CustomerDTO>();
+
+            CreateMap<ProductDTO, DAL.DatabaseFactory.Entities.Product>();
+            CreateMap<DAL.DatabaseFactory.Entities.Product, ProductDTO>();
+
+            CreateMap<DAL.DatabaseFactory.Entities.Employee, EmployeeDTO>();          
+            CreateMap<EmployeeDTO, DAL.DatabaseFactory.Entities.Employee>()          
+                            .ForMember(dest => dest.RoleId, src => src.Ignore());
+
+            CreateMap<DAL.DatabaseFactory.Entities.User, UserDTO>();
+            //CreateMap<UserDTO, DAL.DatabaseFactory.Entities.User>();
         }
     }
 }

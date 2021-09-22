@@ -20,17 +20,19 @@ namespace SEDCWebApplication.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-
+        [HttpGet]
         public IActionResult Privacy(string name, int id)
         {
             return View();
         }
 
+        [HttpGet]
         [Route("Privacy/{id}")]
         public IActionResult Privacy(int id)
         {
