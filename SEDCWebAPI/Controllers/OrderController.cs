@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SEDCWebApplication.BLL.Logic.Models;
 using SEDCWebApplication.DAL.Data.Entities;
 using SEDCWebApplication.Models.Repositories.Interfaces;
-
+using Microsoft.AspNetCore.Cors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace SEDCWebAPI.Controllers
 {
 
-
+    [EnableCors("PolicyOne")]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
@@ -47,9 +47,17 @@ namespace SEDCWebAPI.Controllers
 
         // POST api/<OrderController>
         [HttpPost]
-        public void Post([FromBody] OrderDTO order)
+        public IActionResult Post([FromBody] OrderDTO order)
         {
-            _orderRepository.Add(order);
+            OrderDTO orderMade = _orderRepository.Add(order);
+            if (orderMade == null)
+            {
+                return BadRequest(new { message = "Something is not right with the order. Please try again or if the problem persists contact our support." });
+            }
+            else
+            {
+                return Ok(orderMade);
+            }
         }
 
         // PUT api/<OrderController>/5

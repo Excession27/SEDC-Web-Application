@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using SEDCWebApplication.BLL.Logic.Models;
 using SEDCWebApplication.DAL.Data.Entities;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 namespace SEDCWebAPI.Controllers
 {
 
-
+    [EnableCors("PolicyOne")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase

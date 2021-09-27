@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
+using SEDCWebAPI.Helpers;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,6 +19,7 @@ namespace SEDCWebAPI.Controllers
 
     [Route("api/[controller]")]
     [EnableCors("PolicyOne")]
+    [Authorize(Roles = AuthorizationRoles.Admin)]
     [ApiController]
     public class EmployeeController : ControllerBase
     {

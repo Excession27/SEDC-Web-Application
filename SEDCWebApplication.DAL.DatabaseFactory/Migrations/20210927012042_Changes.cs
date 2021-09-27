@@ -2,7 +2,7 @@
 
 namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
 {
-    public partial class createNewDb : Migration
+    public partial class Changes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

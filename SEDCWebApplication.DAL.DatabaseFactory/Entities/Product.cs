@@ -13,7 +13,7 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Entities
         public int ProductId { get; set; }
 
         public string ProductName { get; set; }
-
+        [Column(TypeName = "decimal(18,2)")]
         public decimal UnitPrice { get; set; }
 
         public bool IsDiscounted { get; set; }
@@ -25,6 +25,8 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Entities
         public string Size { get; set; }
 
         public string ImagePath { get; set; }
+
+        public string Description { get; set; }
 
         public ICollection<Order> Orders { get; set; }
     }

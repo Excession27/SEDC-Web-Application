@@ -10,8 +10,8 @@ using SEDCWebApplication.DAL.DatabaseFactory;
 namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210920164308_role-implementation")]
-    partial class roleimplementation
+    [Migration("20210927012042_Changes")]
+    partial class Changes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,10 +61,10 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                     b.Property<string>("OrderNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderStatusId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("TotalAmount")
@@ -76,26 +76,34 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("OrderStatusId");
-
                     b.HasIndex("ProductId");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.OrderStatus", b =>
+            modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.OrderItem", b =>
                 {
-                    b.Property<int>("OrderStatusId")
+                    b.Property<int>("OrderItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("StatusName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
-                    b.HasKey("OrderStatusId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.ToTable("OrderStatus");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItem");
                 });
 
             modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Product", b =>
@@ -104,6 +112,9 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
@@ -163,6 +174,9 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
@@ -201,9 +215,6 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                     b.Property<string>("Pol")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.HasIndex("RoleId");
 
                     b.HasDiscriminator().HasValue("Employee");
@@ -223,12 +234,6 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.OrderStatus", "OrderStatus")
-                        .WithMany()
-                        .HasForeignKey("OrderStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.Product", null)
                         .WithMany("Orders")
                         .HasForeignKey("ProductId");
@@ -236,8 +241,25 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Employee");
+                });
 
-                    b.Navigation("OrderStatus");
+            modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.OrderItem", b =>
+                {
+                    b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Customer", b =>
@@ -260,6 +282,11 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Product", b =>

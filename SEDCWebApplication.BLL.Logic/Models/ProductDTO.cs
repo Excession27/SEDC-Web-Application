@@ -18,6 +18,7 @@ namespace SEDCWebApplication.BLL.Logic.Models
         public bool? IsDeleted { get; set; }
         public string Size { get; set; }
         public string ImagePath { get; set; }
+        public string Description { get; set; }
 
     }
 }

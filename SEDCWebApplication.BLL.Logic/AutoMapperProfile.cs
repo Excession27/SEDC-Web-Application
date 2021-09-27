@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SEDCWebApplication.BLL.Logic.Helpers;
 using SEDCWebApplication.BLL.Logic.Models;
 using SEDCWebApplication.DAL.Data.Entities;
 using System;
@@ -54,7 +55,7 @@ namespace SEDCWebApplication.BLL.Logic
             CreateMap<EmployeeDTO, DAL.DatabaseFactory.Entities.Employee>()          
                             .ForMember(dest => dest.RoleId, src => src.Ignore());
 
-            CreateMap<DAL.DatabaseFactory.Entities.User, UserDTO>();
+            CreateMap<DAL.DatabaseFactory.Entities.User, UserDTO>().ForMember(dest => dest.Role, src => src.MapFrom(src => EnumHelper.GetString<RoleEnum>(src.RoleId))); ;
             //CreateMap<UserDTO, DAL.DatabaseFactory.Entities.User>();
         }
     }
