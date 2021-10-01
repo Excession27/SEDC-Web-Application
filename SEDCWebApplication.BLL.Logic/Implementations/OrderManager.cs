@@ -32,7 +32,7 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
             double unixTimeMilliseconds = ts.TotalMilliseconds;
 
             string OrderNumber = ("O_" + unixTimeMilliseconds);
-            OrderNumber = OrderNumber.Remove(OrderNumber.Length - 4);
+            OrderNumber = OrderNumber.Remove(OrderNumber.Length - 5);
             return OrderNumber;
         }
 

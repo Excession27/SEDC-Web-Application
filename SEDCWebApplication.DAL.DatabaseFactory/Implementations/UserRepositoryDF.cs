@@ -26,5 +26,15 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
                 return result;
             }
         }
+
+        public User GetUserById (int id)
+        {
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
+            using (var db = new ApplicationDbContext(optionBuilder.Options))
+            {
+                User result = db.Users.First(u => u.UserId == id);
+                return result;
+            }
+        }
     }
 }

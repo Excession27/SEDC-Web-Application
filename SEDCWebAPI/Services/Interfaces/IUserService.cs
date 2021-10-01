@@ -9,5 +9,7 @@ namespace SEDCWebAPI.Services.Interfaces
     public interface IUserService
     {
         UserDTO Authenticate(string username, string password);
+
+        UserDTO GetUserById(int id);
     }
 }

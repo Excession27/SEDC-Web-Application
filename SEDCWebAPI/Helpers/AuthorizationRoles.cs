@@ -9,6 +9,6 @@ namespace SEDCWebAPI.Helpers
     {
         public const string Admin = "Manager, Operator";
 
-        public const string Client = "Manager, Operator, Sales, Customer";
+        public const string Client = "Operator, Sales, Customer";
     }
 }

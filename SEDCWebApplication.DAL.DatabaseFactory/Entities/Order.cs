@@ -17,8 +17,8 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Entities
         public decimal? TotalAmount { get; set; }
         public int Status { get; set; }
         public List<OrderItem> OrderItems { get; set; }
-        public int CustomerId { get; set; }
-        public int EmployeeId { get; set; }
+        public int? CustomerId { get; set; }
+        public int? EmployeeId { get; set; }
 
         [ForeignKey("CustomerId")]
         public Customer Customer { get; set; }

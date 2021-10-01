@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using SEDCWebApplication.BLL.Logic.Helpers;
 using SEDCWebApplication.BLL.Logic.Models;
 using SEDCWebApplication.DAL.Data.Entities;
@@ -9,7 +10,7 @@ namespace SEDCWebApplication.BLL.Logic
     public class AutoMapperProfile : Profile
     {
 
-        public AutoMapperProfile()
+        public AutoMapperProfile(IConfiguration configuration)
         {
 
             /*            CreateMap<Employee, EmployeeDTO>()

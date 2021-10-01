@@ -10,8 +10,6 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Entities
 
         public string EmployeeName { get; set; }
 
-        public int RoleId { get; set; }
-
         public string Pol { get; set; }
 
         public DateTime? DateOfBirth { get; set; }

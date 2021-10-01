@@ -54,5 +54,13 @@ namespace SEDCWebAPI.Services.Implementation
 
             return user;
         }
+
+        public UserDTO GetUserById (int id)
+        {
+            UserDTO user = _userManager.GetUserById(id);
+
+            return user;
+
+        }
     }
 }

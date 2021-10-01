@@ -10,5 +10,7 @@ namespace SEDCWebApplication.BLL.Logic.Interfaces
 
 
         UserDTO GetUserByUserNameAndPassword(string username, string password);
+
+        UserDTO GetUserById(int id);
     }
 }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -12,8 +13,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SEDCWebAPI.Middlewares;
 using SEDCWebAPI.Services.Implementation;
 using SEDCWebAPI.Services.Interfaces;
+using SEDCWebApplication.BLL.Logic;
 using SEDCWebApplication.BLL.Logic.Implementations;
 using SEDCWebApplication.BLL.Logic.Interfaces;
 
@@ -107,6 +110,32 @@ namespace SEDCWebAPI
                             options.AccessDeniedPath = new PathString("/auth/denied");
                             });*/
 
+
+            // configuration for JWT Authentication
+
+            var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings")["Secret"]);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "SEDC_WebAPI", Version = "v1" });
@@ -139,27 +168,12 @@ namespace SEDCWebAPI
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SEDCEF")));
 
-            // configuration for JWT Authentication
 
-            var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings")["Secret"]);
 
-            services.AddAuthentication(x =>
+            services.AddSingleton(provider => new MapperConfiguration(cfg =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+                cfg.AddProfile(new AutoMapperProfile(provider.GetService<IConfiguration>()));
+            }).CreateMapper());
 
             services.AddCors(option => option.AddPolicy("PolicyOne", builder =>
             {
@@ -167,6 +181,8 @@ namespace SEDCWebAPI
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+
+            
 
         }
 
@@ -186,9 +202,19 @@ namespace SEDCWebAPI
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseCors("PolicyOne");
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+            
+
+            
+
+            //custom jwt middleware
+            app.UseMiddleware<JwtMiddleware>();
+
+            //global error handling
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseSwagger();
 

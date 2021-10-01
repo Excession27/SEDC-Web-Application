@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using SEDCWebAPI.Helpers;
 using SEDCWebApplication.BLL.Logic.Models;
 using SEDCWebApplication.DAL.Data.Entities;
 using SEDCWebApplication.Models.Repositories.Interfaces;
-
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,7 @@ namespace SEDCWebAPI.Controllers
     [EnableCors("PolicyOne")]
     [Route("api/[controller]")]
     [ApiController]
+    
     public class ProductController : ControllerBase
     {
 
@@ -31,12 +34,22 @@ namespace SEDCWebAPI.Controllers
             _hostingEnvironment = hostingEnvironment;
 
         }
+        public class ResponseResult
+        {
+            public bool IsError { get; set; }
+            public string ResultValue { get; set; }
+            public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+        }
 
         // GET: api/<ProductController>
+        [Authorize(Roles = AuthorizationRoles.Admin)]
         [HttpGet]
-        public IEnumerable<ProductDTO> GetAll()
+        public ResponseResult GetAll()
         {
-            return _productRepository.GetAllProducts().ToList(); ;
+            
+            IEnumerable<ProductDTO> allProducts = _productRepository.GetAllProducts().ToList();
+            //return Ok(allProducts);
+            return new ResponseResult { ResultValue = "Hello World" };
         }
 
         // GET api/<ProductController>/5

@@ -10,7 +10,7 @@ using SEDCWebApplication.DAL.DatabaseFactory;
 namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210927012042_Changes")]
+    [Migration("20210927175158_Changes")]
     partial class Changes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,10 +49,10 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("OrderDate")
@@ -224,15 +224,11 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                 {
                     b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.Product", null)
                         .WithMany("Orders")

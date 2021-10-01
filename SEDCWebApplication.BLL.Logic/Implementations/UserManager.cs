@@ -37,5 +37,12 @@ namespace SEDCWebApplication.BLL.Logic.Interfaces
                 throw ex;
             }
         }
+
+        public UserDTO GetUserById (int id)
+        {
+            User user = _userDAL.GetUserById(id);
+            UserDTO userDTO = _mapper.Map<UserDTO>(user);
+            return userDTO;
+        }
     }
 }
