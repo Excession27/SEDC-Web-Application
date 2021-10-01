@@ -34,22 +34,15 @@ namespace SEDCWebAPI.Controllers
             _hostingEnvironment = hostingEnvironment;
 
         }
-        public class ResponseResult
-        {
-            public bool IsError { get; set; }
-            public string ResultValue { get; set; }
-            public DateTime Timestamp { get; set; } = DateTime.UtcNow;
-        }
 
         // GET: api/<ProductController>
         [Authorize(Roles = AuthorizationRoles.Admin)]
         [HttpGet]
-        public ResponseResult GetAll()
+        public IActionResult GetAll()
         {
             
             IEnumerable<ProductDTO> allProducts = _productRepository.GetAllProducts().ToList();
-            //return Ok(allProducts);
-            return new ResponseResult { ResultValue = "Hello World" };
+            return Ok(allProducts);
         }
 
         // GET api/<ProductController>/5
