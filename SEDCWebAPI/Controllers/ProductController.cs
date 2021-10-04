@@ -20,7 +20,8 @@ namespace SEDCWebAPI.Controllers
     [EnableCors("PolicyOne")]
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize(Roles = AuthorizationRoles.Admin)]
+
     public class ProductController : ControllerBase
     {
 
@@ -36,7 +37,7 @@ namespace SEDCWebAPI.Controllers
         }
 
         // GET: api/<ProductController>
-        [Authorize(Roles = AuthorizationRoles.Admin)]
+        
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -51,6 +52,7 @@ namespace SEDCWebAPI.Controllers
         {
             return _productRepository.GetProductById(id);
         }
+
 
         // POST api/<ProductController>
         [HttpPost]

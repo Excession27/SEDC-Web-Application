@@ -47,6 +47,7 @@ namespace SEDCWebAPI.Middlewares
                     Date = DateTime.Now,
                     Message = $"User with id {user.UserId} call {context.Request.Path}"
                 };
+                await _next(context);
             }
             catch (Exception ex)
             {

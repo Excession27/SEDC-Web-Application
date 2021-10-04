@@ -56,6 +56,9 @@ namespace SEDCWebApplication.BLL.Logic
             CreateMap<EmployeeDTO, DAL.DatabaseFactory.Entities.Employee>()          
                             .ForMember(dest => dest.RoleId, src => src.Ignore());
 
+            CreateMap<DAL.DatabaseFactory.Entities.Order, OrderDTO>();
+            CreateMap<OrderDTO, DAL.DatabaseFactory.Entities.Order>();
+
             CreateMap<DAL.DatabaseFactory.Entities.User, UserDTO>().ForMember(dest => dest.Role, src => src.MapFrom(src => EnumHelper.GetString<RoleEnum>(src.RoleId))); ;
             //CreateMap<UserDTO, DAL.DatabaseFactory.Entities.User>();
         }

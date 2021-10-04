@@ -50,6 +50,17 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
             }
         }
 
+        public List<Order> GetPreviousOrders(int skip, int take, int customerId)
+        {
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
+            using (var db = new ApplicationDbContext(optionBuilder.Options))
+            {
+                List<Order> allOrders = db.Orders.Skip(skip).Take(take).ToList();
+                List<Order> result = allOrders.Where(item => item.CustomerId == customerId).ToList();
+                return result;
+            }
+        }
+
         public void Update(Order item)
         {
 

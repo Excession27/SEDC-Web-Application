@@ -26,6 +26,11 @@ namespace SEDCWebApplication.Models.Repositories.Implementations
             return _orderManager.GetOrderById(id);
         }
 
+        public IEnumerable<OrderDTO> GetPreviousOrders(int customerId)
+        {
+            return _orderManager.GetPreviousOrders(customerId);
+        }
+
         public OrderDTO Add(OrderDTO order)
         {
             return _orderManager.Add(order);

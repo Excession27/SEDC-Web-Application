@@ -12,5 +12,6 @@ namespace SEDCWebApplication.Models.Repositories.Interfaces
         ProductDTO GetProductById(int id);
         ProductDTO Add(ProductDTO product);
         string Delete(int id);
+
     }
 }

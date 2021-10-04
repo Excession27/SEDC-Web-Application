@@ -14,5 +14,7 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Interfaces
         List<Order> GetByEmployeeId(int id);
 
         List<Order> GetAll(int skip, int take);
+
+        List<Order> GetPreviousOrders(int skip, int take, int customerId);
     }
 }
