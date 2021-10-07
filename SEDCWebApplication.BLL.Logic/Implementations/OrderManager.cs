@@ -79,9 +79,9 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
             throw new NotImplementedException();
         }
 
-        IEnumerable<OrderDTO> IOrderManager.GetPreviousOrders(int customerId)
+        IEnumerable<Order> IOrderManager.GetPreviousOrders(int customerId)
         {
-            return _mapper.Map<List<OrderDTO>>(_orderDAL.GetPreviousOrders(0, 50, customerId));
+            return _mapper.Map<List<Order>>(_orderDAL.GetPreviousOrders(0, 50, customerId));
         }
 
         OrderDTO IOrderManager.GetOrderById(int id)

@@ -28,7 +28,7 @@ namespace SEDCWebAPI.Controllers
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, IWebHostEnvironment hostingEnvironment)
+        public EmployeeController(Services.Interfaces.IDataService _service, IEmployeeRepository employeeRepository, IWebHostEnvironment hostingEnvironment)
         {
             _employeeRepository = employeeRepository;
             _hostingEnvironment = hostingEnvironment;

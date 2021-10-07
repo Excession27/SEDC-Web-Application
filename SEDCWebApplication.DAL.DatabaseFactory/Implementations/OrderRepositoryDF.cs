@@ -55,8 +55,8 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                List<Order> allOrders = db.Orders.Skip(skip).Take(take).ToList();
-                List<Order> result = allOrders.Where(item => item.CustomerId == customerId).ToList();
+                List<Order> result = db.Orders.Include("OrderItems").Where(item => item.CustomerId == customerId).Skip(skip).Take(take).ToList();
+                
                 return result;
             }
         }

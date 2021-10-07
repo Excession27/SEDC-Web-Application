@@ -17,7 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebAPI", "SEDCWebAPI\SE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.DAL.EntityFactory", "SEDCWebApplication.DAL.EntityFactory\SEDCWebApplication.DAL.EntityFactory.csproj", "{93B87282-38B9-4753-B58E-676A62B8AC66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDCWebApplication.DAL.DatabaseFactory", "SEDCWebApplication.DAL.DatabaseFactory\SEDCWebApplication.DAL.DatabaseFactory.csproj", "{372EAA9E-3FB4-42F3-ABDE-950CC81E0E01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.DAL.DatabaseFactory", "SEDCWebApplication.DAL.DatabaseFactory\SEDCWebApplication.DAL.DatabaseFactory.csproj", "{372EAA9E-3FB4-42F3-ABDE-950CC81E0E01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDCWebApplication.Tests.WebAPI.XUnitTest", "SEDCWebApplication.Tests.WebAPI.XUnitTest\SEDCWebApplication.Tests.WebAPI.XUnitTest.csproj", "{882C109B-A106-4F5C-A926-4BF3C00D6DAE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D41AA7FF-41DE-4986-85EB-A9C9F0E0BE5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDCWebApplication.BLL.Logic.XUnitTest", "SEDCWebApplication.BLL.Logic.XUnitTest\SEDCWebApplication.BLL.Logic.XUnitTest.csproj", "{423DAC13-B9AD-4F4C-A550-415F1ED4038B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,14 @@ Global
 		{372EAA9E-3FB4-42F3-ABDE-950CC81E0E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{372EAA9E-3FB4-42F3-ABDE-950CC81E0E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{372EAA9E-3FB4-42F3-ABDE-950CC81E0E01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{882C109B-A106-4F5C-A926-4BF3C00D6DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{882C109B-A106-4F5C-A926-4BF3C00D6DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{882C109B-A106-4F5C-A926-4BF3C00D6DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{882C109B-A106-4F5C-A926-4BF3C00D6DAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{423DAC13-B9AD-4F4C-A550-415F1ED4038B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423DAC13-B9AD-4F4C-A550-415F1ED4038B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423DAC13-B9AD-4F4C-A550-415F1ED4038B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423DAC13-B9AD-4F4C-A550-415F1ED4038B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +72,8 @@ Global
 		{9A5CD981-FFFE-4BC5-8CCA-1394F5E2FDBC} = {C09B8379-55B4-4650-8257-2F8418D8129E}
 		{93B87282-38B9-4753-B58E-676A62B8AC66} = {C09B8379-55B4-4650-8257-2F8418D8129E}
 		{372EAA9E-3FB4-42F3-ABDE-950CC81E0E01} = {C09B8379-55B4-4650-8257-2F8418D8129E}
+		{882C109B-A106-4F5C-A926-4BF3C00D6DAE} = {D41AA7FF-41DE-4986-85EB-A9C9F0E0BE5E}
+		{423DAC13-B9AD-4F4C-A550-415F1ED4038B} = {D41AA7FF-41DE-4986-85EB-A9C9F0E0BE5E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78B57FE5-25C1-4C66-807E-D640D2827950}

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using SEDCWebAPI.Helpers;
+using SEDCWebApplication.DAL.DatabaseFactory.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -49,10 +50,11 @@ namespace SEDCWebAPI.Controllers
         }
 
         
-        [HttpGet("orders/{customerId}")]
-        public IActionResult GetPreviousOrders(int customerId)
+        [HttpGet("orders")]
+        public IActionResult GetPreviousOrders()
         {
-            IEnumerable<OrderDTO> previousOrders = _orderRepository.GetPreviousOrders(customerId).ToList();
+            UserDTO user = (UserDTO)HttpContext.Items["User"];
+            IEnumerable<Order> previousOrders = _orderRepository.GetPreviousOrders(user.UserId).ToList();
             return Ok(previousOrders);
         }
 

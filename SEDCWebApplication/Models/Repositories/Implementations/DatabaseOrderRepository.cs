@@ -1,6 +1,7 @@
 ﻿using SEDCWebApplication.BLL.Logic.Interfaces;
 using SEDCWebApplication.BLL.Logic.Models;
 using SEDCWebApplication.DAL.Data.Implementations;
+using SEDCWebApplication.DAL.DatabaseFactory.Entities;
 using SEDCWebApplication.Models.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace SEDCWebApplication.Models.Repositories.Implementations
             return _orderManager.GetOrderById(id);
         }
 
-        public IEnumerable<OrderDTO> GetPreviousOrders(int customerId)
+        public IEnumerable<Order> GetPreviousOrders(int customerId)
         {
             return _orderManager.GetPreviousOrders(customerId);
         }
