@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using SEDCWebAPI.Helpers;
+using SEDCWebAPI.Services.Interfaces;
 using SEDCWebApplication.BLL.Logic.Models;
 using SEDCWebApplication.DAL.Data.Entities;
-using SEDCWebApplication.Models.Repositories.Interfaces;
+
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -26,12 +27,12 @@ namespace SEDCWebAPI.Controllers
     {
 
             
-        private readonly IProductRepository _productRepository;
+        private readonly IDataService _dataService;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public ProductController(IProductRepository productRepository, IWebHostEnvironment hostingEnvironment)
+        public ProductController(IDataService dataService, IWebHostEnvironment hostingEnvironment)
         {
-            _productRepository = productRepository;
+            _dataService = dataService;
             _hostingEnvironment = hostingEnvironment;
 
         }
@@ -39,26 +40,26 @@ namespace SEDCWebAPI.Controllers
         // GET: api/<ProductController>
         
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAll()
         {
             
-            IEnumerable<ProductDTO> allProducts = _productRepository.GetAllProducts().ToList();
+            IEnumerable<ProductDTO> allProducts = await _dataService.GetAllProducts();
             return Ok(allProducts);
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public ProductDTO Get(int id)
+        public async Task<ProductDTO> Get(int id)
         {
-            return _productRepository.GetProductById(id);
+            return await _dataService.GetProductById(id);
         }
 
 
         // POST api/<ProductController>
         [HttpPost]
-        public void Post([FromBody] ProductDTO product)
+        public async Task<ProductDTO> Post([FromBody] ProductDTO product)
         {
-            _productRepository.Add(product);
+            return await _dataService.AddProduct(product);
         }
 
         // PUT api/<ProductController>/5
@@ -69,9 +70,9 @@ namespace SEDCWebAPI.Controllers
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public async Task<ProductDTO> Delete(int id)
         {
-            return _productRepository.Delete(id);
+            return await _dataService.DeleteProduct(id);
         }
     }
 }

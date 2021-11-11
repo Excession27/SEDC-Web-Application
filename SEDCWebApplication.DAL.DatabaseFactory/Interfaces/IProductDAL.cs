@@ -2,19 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SEDCWebApplication.DAL.DatabaseFactory.Interfaces
 {
     public interface IProductDAL
     {
-        void Save(Product item);
+        Task Save(Product item);
 
-        Product GetById(int id);
+        Task<Product> GetById(int id);
 
-        List<Product> GetAll(int skip, int take);
+        Task<List<Product>> GetAll(int skip, int take);
 
-        void Update(Product item);
+        Task<Product> Update(Product item);
 
-        string Delete(int id);
+        Task<Product> Delete(int id);
     }
 }

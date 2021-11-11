@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using SEDCWebApplication.BLL.Logic.Models;
 
-using SEDCWebApplication.Models.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
 using SEDCWebAPI.Helpers;
+using SEDCWebAPI.Services.Interfaces;
+using System.Threading.Tasks;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,13 +26,15 @@ namespace SEDCWebAPI.Controllers
     {
 
             
-        private readonly IEmployeeRepository _employeeRepository;
+        
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IDataService _dataService;
 
-        public EmployeeController(Services.Interfaces.IDataService _service, IEmployeeRepository employeeRepository, IWebHostEnvironment hostingEnvironment)
+        public EmployeeController(IDataService dataService, IWebHostEnvironment hostingEnvironment)
         {
-            _employeeRepository = employeeRepository;
+            
             _hostingEnvironment = hostingEnvironment;
+            _dataService = dataService;
 
 
         }
@@ -39,36 +42,39 @@ namespace SEDCWebAPI.Controllers
         // GET: api/<EmployeeController>
         
         [HttpGet]
-        public IEnumerable<EmployeeDTO> Get()
+        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetAll()
         {
-            return _employeeRepository.GetAllEmployees().ToList(); ;
+            var result = await _dataService.GetAllEmployees(); // ToListAsync???
+            return Ok(result);
         }
 
         // GET api/<EmployeeController>/5
         
         [HttpGet("{id}")]
-        public EmployeeDTO Get(int id)
+        public async Task<EmployeeDTO> GetById(int id)
         {
-            return _employeeRepository.GetEmployeeById(id);
+            return await _dataService.GetEmployeeById(id);
         }
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public void Post([FromBody] EmployeeDTO employee)
+        public async Task<EmployeeDTO> Post([FromBody] EmployeeDTO employee)
         {
-            _employeeRepository.Add(employee);
+            return await _dataService.AddEmployee(employee);
         }
 
         // PUT api/<EmployeeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] EmployeeDTO employee)
         {
+            // TODO
         }
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _dataService.DeleteEmployee(id);
         }
     }
 }

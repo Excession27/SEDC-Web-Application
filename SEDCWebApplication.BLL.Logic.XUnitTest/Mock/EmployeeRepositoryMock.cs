@@ -1,5 +1,7 @@
-﻿using SEDCWebApplication.DAL.EntityFactory.Entities;
-using SEDCWebApplication.DAL.EntityFactory.Interfaces;
+﻿using SEDCWebAPI.Controllers;
+using SEDCWebAPI.Services.Interfaces;
+using SEDCWebApplication.DAL.DatabaseFactory.Entities;
+using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,26 +18,37 @@ namespace SEDCWebApplication.BLL.Logic.XUnitTest.Mock
             {
                 new Employee
                 {
-                    //EmployeeId=1,
+                    UserId=1,
                     EmployeeName="Pera",
                     RoleId=1,
                     ImagePath = "~/img/avatar.png",
-                    Test = true
+                    DateOfBirth = new DateTime(1990, 5, 19)
+                    
                 },
                 new Employee
                 {
-                    //EmployeeId=2,
+                    UserId=2,
                     EmployeeName="Mika",
                     RoleId=2,
                     ImagePath = "~/img/avatar.png",
-                    Test = false
+                    DateOfBirth = new DateTime(1980, 2, 5)
+
                 },
                 new Employee
                 {
-                    //EmployeeId=3,
+                    UserId=3,
                     EmployeeName="Laza",
                     RoleId=3,
-                    ImagePath = "~/img/avatar.png"
+                    ImagePath = "~/img/avatar.png",
+                    DateOfBirth = new DateTime(1998, 10, 1)
+                },
+                new Employee
+                {
+                    UserId=4,
+                    EmployeeName="Milica",
+                    RoleId=2,
+                    ImagePath = "~/img/avatar.png",
+                    DateOfBirth = new DateTime(1992, 1, 22)
                 }
             };
         }

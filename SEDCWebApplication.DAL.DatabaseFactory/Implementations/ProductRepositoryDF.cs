@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using SEDCWebApplication.DAL.DatabaseFactory.Entities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
 {
@@ -18,46 +19,58 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
             Configuration = configuration;
         }
 
-        public void Save(Product item)
+        public async Task Save(Product item)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
                 Product product = new Product();
                 product = item;
-                db.Products.Add(product);
+                await db.Products.AddAsync(product);
                 db.SaveChanges();
             }
         }
 
-        public Product GetById(int id)
+        public async Task<Product> GetById(int id)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                Product result = db.Products.First(e => e.ProductId == id);
+                Product result = await db.Products.FirstAsync(e => e.ProductId == id);
                 return result;
             }
         }
 
-        public List<Product> GetAll(int skip, int take)
+        public async Task<List<Product>> GetAll(int skip, int take)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                List<Product> result = db.Products.Skip(skip).Take(take).ToList();
+                List<Product> result = await db.Products.Skip(skip).Take(take).ToListAsync();
                 return result;
             }
         }
 
-        public void Update(Product item)
+        public async Task<Product> Update(Product item)
         {
-
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
+            using (var db = new ApplicationDbContext(optionBuilder.Options))
+            {
+                Product result = db.Products.Update(item).Entity;
+                return result;
+            }
         }
 
-        public string Delete(int id)
+        public async Task<Product> Delete(int id)
         {
-            return "Not implemented yet :)";
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
+            using (var db = new ApplicationDbContext(optionBuilder.Options))
+            {
+                Product result = await db.Products.Where(product => product.ProductId == id).FirstAsync();
+                result.IsDeleted = true;
+                db.SaveChanges();
+                return result;
+            }    
         }
     }
 }

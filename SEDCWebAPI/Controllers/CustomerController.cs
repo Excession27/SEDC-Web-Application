@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using SEDCWebAPI.Services.Interfaces;
 using SEDCWebApplication.BLL.Logic.Models;
 using SEDCWebApplication.DAL.Data.Entities;
-using SEDCWebApplication.Models.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,48 +21,49 @@ namespace SEDCWebAPI.Controllers
     {
 
             
-        private readonly ICustomerRepository _customerRepository;
+        private readonly IDataService _dataService;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public CustomerController(ICustomerRepository customerRepository, IWebHostEnvironment hostingEnvironment)
+        public CustomerController(IDataService dataService, IWebHostEnvironment hostingEnvironment)
         {
-            _customerRepository = customerRepository;
+            _dataService = dataService;
             _hostingEnvironment = hostingEnvironment;
 
         }
 
         // GET: api/<CustomerController>
         [HttpGet]
-        public IEnumerable<CustomerDTO> Get()
+        public async Task<IEnumerable<CustomerDTO>> GetAllCustomers()
         {
-            return _customerRepository.GetAllCustomers().ToList(); ;
+            return await _dataService.GetAllCustomers();
         }
 
         // GET api/<CustomerController>/5
         [HttpGet("{id}")]
-        public CustomerDTO Get(int id)
+        public async Task<CustomerDTO> GetCustomerById(int id)
         {
-            return _customerRepository.GetCustomerById(id);
+            return await _dataService.GetCustomerById(id);
         }
 
         // POST api/<CustomerController>
         [HttpPost]
         public void Post([FromBody] CustomerDTO customer)
         {
-            _customerRepository.Add(customer);
+            _dataService.AddCustomer(customer);
         }
 
         // PUT api/<CustomerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] CustomerDTO customer)
         {
+            // TODO
         }
 
         // DELETE api/<CustomerController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            
+            _dataService.DeleteCustomer(id);
         }
     }
 }

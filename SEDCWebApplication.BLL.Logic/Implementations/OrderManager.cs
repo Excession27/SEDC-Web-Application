@@ -6,6 +6,7 @@ using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SEDCWebApplication.BLL.Logic.Implementations
 {
@@ -36,7 +37,7 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
             return OrderNumber;
         }
 
-        public OrderDTO Add(OrderDTO orderDto)
+        public async Task<OrderDTO> Add(OrderDTO orderDto)
         {
             Order order = new Order();
             order.TotalAmount = 0;
@@ -52,7 +53,7 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
             {
                 if (orderItemDto.ProductId > 0)
                 {
-                    Product product = _productDAL.GetById(orderItemDto.ProductId);
+                    Product product = await _productDAL.GetById(orderItemDto.ProductId);
                     order.TotalAmount += product.UnitPrice * orderItemDto.Quantity;
 
                     OrderItem orderItem = new OrderItem();
@@ -74,22 +75,22 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
             return orderDto;
         }
 
-        IEnumerable<OrderDTO> IOrderManager.GetAllOrders()
+        public IEnumerable<OrderDTO> GetAllOrders()
         {
             throw new NotImplementedException();
         }
 
-        IEnumerable<Order> IOrderManager.GetPreviousOrders(int customerId)
+        public IEnumerable<Order> GetPreviousOrders(int id)
         {
-            return _mapper.Map<List<Order>>(_orderDAL.GetPreviousOrders(0, 50, customerId));
+            return _mapper.Map<List<Order>>(_orderDAL.GetPreviousOrders(0, 50, id));
         }
 
-        OrderDTO IOrderManager.GetOrderById(int id)
+        public OrderDTO GetOrderById(int id)
         {
             throw new NotImplementedException();
         }
 
-        string IOrderManager.Delete(int id)
+        public string Delete(int id)
         {
             throw new NotImplementedException();
         }

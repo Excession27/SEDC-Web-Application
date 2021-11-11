@@ -14,6 +14,7 @@ using System.Text;
 // EntityFramework - Database Factory
 using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
 using SEDCWebApplication.DAL.DatabaseFactory.Entities;
+using System.Threading.Tasks;
 
 namespace SEDCWebApplication.BLL.Logic.Implementations
 {
@@ -26,34 +27,34 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
             _productDAL = productDAL;
             _mapper = mapper;
         }
-        public ProductDTO Add(ProductDTO product)
+        public async Task<ProductDTO> Add(ProductDTO product)
         {
             Product productEntity = _mapper.Map<Product>(product);
-            _productDAL.Save(productEntity);
+            await _productDAL.Save(productEntity);
             product = _mapper.Map<ProductDTO>(productEntity);
             return product;
         }
 
-        public IEnumerable<ProductDTO> GetAllProducts()
+        public async Task<IEnumerable<ProductDTO>> GetAllProducts()
         {
-            return _mapper.Map<List<ProductDTO>>(_productDAL.GetAll(0, 50));
+            return _mapper.Map<List<ProductDTO>>(await _productDAL.GetAll(0, 50));
         }
 
-        public ProductDTO GetProductById(int id)
+        public async Task<ProductDTO> GetProductById(int id)
         {
-            return _mapper.Map<ProductDTO>(_productDAL.GetById(id));
+            return _mapper.Map<ProductDTO>( await _productDAL.GetById(id));
         }
-        public ProductDTO Update(ProductDTO product)
+        public async Task<ProductDTO> Update(ProductDTO product)
         {
             Product productEntity = _mapper.Map<Product>(product);
-            _productDAL.Update(productEntity);
+            await _productDAL.Update(productEntity);
             product = _mapper.Map<ProductDTO>(productEntity);
             return product;
         }
 
-        public string Delete(int id)
+        public async Task<ProductDTO> Delete(int id)
         {
-            return _productDAL.Delete(id);
+            return _mapper.Map<ProductDTO>(await _productDAL.Delete(id));
         }            
     }
 }

@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0006: Metadata file 'D:\Work\Learning\SEDC2020\SEDC - Web Applications using ASP.NET Core MVC\Class 8\SEDCWebApplication\SEDCWebApplication\bin\Debug\netcoreapp3.1\SEDCWebApplication.dll' could not be found
+dotnet_diagnostic.CS0006.severity = none

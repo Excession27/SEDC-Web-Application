@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SEDCWebApplication.BLL.Logic.Models;
 using SEDCWebApplication.DAL.Data.Entities;
-using SEDCWebApplication.Models.Repositories.Interfaces;
 using Microsoft.AspNetCore.Cors;
 using System;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using SEDCWebAPI.Helpers;
 using SEDCWebApplication.DAL.DatabaseFactory.Entities;
+using SEDCWebAPI.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,44 +25,44 @@ namespace SEDCWebAPI.Controllers
     {
 
             
-        private readonly IOrderRepository _orderRepository;
+        private readonly IDataService _dataService;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public OrderController(IOrderRepository orderRepository, IWebHostEnvironment hostingEnvironment)
+        public OrderController(IDataService dataService, IWebHostEnvironment hostingEnvironment)
         {
-            _orderRepository = orderRepository;
+            _dataService = dataService;
             _hostingEnvironment = hostingEnvironment;
 
         }
 
         // GET: api/<OrderController>
         [HttpGet]
-        public IEnumerable<OrderDTO> GetAll()
+        public async Task<IEnumerable<OrderDTO>> GetAllOrders()
         {
-            return _orderRepository.GetAllOrders().ToList(); ;
+            return await _dataService.GetAllOrders();
         }
 
         // GET api/<OrderController>/5
         [HttpGet("{id}")]
-        public OrderDTO Get(int id)
+        public async Task<OrderDTO> Get(int id)
         {
-            return _orderRepository.GetOrderById(id);
+            return await _dataService.GetOrderById(id);
         }
 
         
         [HttpGet("orders")]
-        public IActionResult GetPreviousOrders()
+        public async Task<IActionResult> GetPreviousOrders()
         {
             UserDTO user = (UserDTO)HttpContext.Items["User"];
-            IEnumerable<Order> previousOrders = _orderRepository.GetPreviousOrders(user.UserId).ToList();
+            IEnumerable<Order> previousOrders = await _dataService.GetPreviousOrders(user.UserId);
             return Ok(previousOrders);
         }
 
         // POST api/<OrderController>
         [HttpPost]
-        public IActionResult Post([FromBody] OrderDTO order)
+        public async Task<IActionResult> Post([FromBody] OrderDTO order)
         {
-            OrderDTO orderMade = _orderRepository.Add(order);
+            OrderDTO orderMade = await _dataService.AddOrder(order);
             if (orderMade == null)
             {
                 return BadRequest(new { message = "Something is not right with the order. Please try again or if the problem persists contact our support." });
@@ -81,9 +81,9 @@ namespace SEDCWebAPI.Controllers
 
         // DELETE api/<OrderController>/5
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public IActionResult DeleteOrder(int id)
         {
-            return _orderRepository.Delete(id);
+            return _dataService.DeleteOrder(id);
         }
     }
 }

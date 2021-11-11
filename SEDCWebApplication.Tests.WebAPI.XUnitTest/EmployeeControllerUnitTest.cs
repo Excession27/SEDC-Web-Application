@@ -17,7 +17,7 @@ namespace SEDCWebApplication.Tests.WebAPI.XUnitTest
         public EmployeeControllerUnitTest()
         {
             _service = new DataServiceMock();
-            _controller = new EmployeeController(_service, null, null);
+            _controller = new EmployeeController(_service, null);
             
         }
 
@@ -30,14 +30,15 @@ namespace SEDCWebApplication.Tests.WebAPI.XUnitTest
             // Assert
             Assert.IsType<OkObjectResult>(okResult.Result);
         }
-        
+
         [Fact]
         public void Get_WhenCalled_ReturnsAllItems()
         {
             // Act
             var okResult = _controller.Get().Result as OkObjectResult;
 
-            Assert.IsType<OkObjectResult>(okResult.Value);
+            var items = Assert.IsType<List<EmployeeDTO>>(okResult.Value);
+            Assert.Equal(4, items.Count);
         }
     }
 }

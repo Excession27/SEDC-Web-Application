@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using SEDCWebApplication.DAL.DatabaseFactory.Entities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
 {
@@ -18,44 +19,45 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
             Configuration = configuration;
         }
 
-        public void Save(Order item)
+        public async void Save(Order item)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
                 Order order = new Order();
                 order = item;
-                db.Orders.Add(order);
+                await db.Orders.AddAsync(order);
                 db.SaveChanges();
             }
         }
 
-        public Order GetById(int id)
+        public async Task<Order> GetById(int id)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                Order result = db.Orders.First(e => e.OrderId == id);
+                Order result = await db.Orders.FirstAsync(e => e.OrderId == id);
+                
                 return result;
             }
         }
 
-        public List<Order> GetAll(int skip, int take)
+        public async Task<List<Order>> GetAll(int skip, int take)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                List<Order> result = db.Orders.Skip(skip).Take(take).ToList();
+                List<Order> result = await db.Orders.Skip(skip).Take(take).ToListAsync();
                 return result;
             }
         }
 
-        public List<Order> GetPreviousOrders(int skip, int take, int customerId)
+        public async Task<List<Order>> GetPreviousOrders(int skip, int take, int customerId)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDCEF"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                List<Order> result = db.Orders.Include("OrderItems").Where(item => item.CustomerId == customerId).Skip(skip).Take(take).ToList();
+                List<Order> result = await db.Orders.Include(o => o.OrderItems).ThenInclude(oi => oi.Product).Where(item => item.CustomerId == customerId).Skip(skip).Take(take).ToListAsync();
                 
                 return result;
             }
@@ -66,15 +68,16 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
 
         }
 
-        public List<Order> GetByEmployeeId(int id)
+        public async Task<List<Order>> GetByEmployeeId(int id)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                List<Order> result = db.Orders
+                List<Order> result = await db.Orders
                                             .Include(o => o.Customer)
                                             .Where(e => e.EmployeeId == id)
-                                            .ToList();
+                                            .ToListAsync();
+                
                 return result;
             }
         }

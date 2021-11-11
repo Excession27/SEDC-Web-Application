@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SEDCWebApplication.DAL.DatabaseFactory.Interfaces
 {
@@ -9,12 +10,12 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Interfaces
     {
         void Save(Order item);
 
-        Order GetById(int id);
+        Task<Order> GetById(int id);
 
-        List<Order> GetByEmployeeId(int id);
+        Task<List<Order>> GetByEmployeeId(int id);
 
-        List<Order> GetAll(int skip, int take);
+        Task<List<Order>> GetAll(int skip, int take);
 
-        List<Order> GetPreviousOrders(int skip, int take, int customerId);
+        Task<List<Order>> GetPreviousOrders(int skip, int take, int id);
     }
 }

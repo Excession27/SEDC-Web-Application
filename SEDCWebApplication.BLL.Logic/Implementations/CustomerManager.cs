@@ -17,36 +17,42 @@ using System.Text;
 //EntityFramework - Database Factory
 using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
 using SEDCWebApplication.DAL.DatabaseFactory.Entities;
-
+using System.Threading.Tasks;
+using SEDCWebApplication.DAL.DatabaseFactory.GenericRepository;
+using Microsoft.Extensions.Configuration;
 
 namespace SEDCWebApplication.BLL.Logic.Implementations
 {
     public class CustomerManager : ICustomerManager
     {
-        private readonly ICustomerDAL _customerDAL;
+        private readonly IGenericRepository<Customer> _customerDAL;
         private readonly IMapper _mapper;
-        public CustomerManager(ICustomerDAL customerDAL, IMapper mapper)
+        private readonly IOrderDAL _orderDAL;
+        private readonly IConfiguration _configuration;
+        public CustomerManager(IGenericRepository<Customer> customerDAL, IOrderDAL orderDAL, IMapper mapper, IConfiguration configuration)
         {
             _customerDAL = customerDAL;
+            _orderDAL = orderDAL;
             _mapper = mapper;
+            _configuration = configuration;
         }
-        public CustomerDTO Add(CustomerDTO customer)
+        public async Task<CustomerDTO> Add(CustomerDTO customer)
         {
             
             Customer customerEntity = _mapper.Map<Customer>(customer);
-            _customerDAL.Save(customerEntity);
+            await _customerDAL.Save(customerEntity);
             customer = _mapper.Map<CustomerDTO>(customerEntity);
             return customer;
         }
 
-        public IEnumerable<CustomerDTO> GetAllCustomers()
+        public async Task<IEnumerable<CustomerDTO>> GetAllCustomers()
         {
-            return _mapper.Map<List<CustomerDTO>>(_customerDAL.GetAll(0, 50));
+            return _mapper.Map<List<CustomerDTO>>(await _customerDAL.GetAll(0, 50));
         }
 
-        public CustomerDTO GetCustomerById(int id)
+        public async Task<CustomerDTO> GetCustomerById(int id)
         {
-            return _mapper.Map<CustomerDTO>(_customerDAL.GetById(id));
+            return _mapper.Map<CustomerDTO>(await _customerDAL.GetById(id));
         }
     }
 }

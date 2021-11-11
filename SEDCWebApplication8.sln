@@ -19,11 +19,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.DAL.Enti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.DAL.DatabaseFactory", "SEDCWebApplication.DAL.DatabaseFactory\SEDCWebApplication.DAL.DatabaseFactory.csproj", "{372EAA9E-3FB4-42F3-ABDE-950CC81E0E01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDCWebApplication.Tests.WebAPI.XUnitTest", "SEDCWebApplication.Tests.WebAPI.XUnitTest\SEDCWebApplication.Tests.WebAPI.XUnitTest.csproj", "{882C109B-A106-4F5C-A926-4BF3C00D6DAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.Tests.WebAPI.XUnitTest", "SEDCWebApplication.Tests.WebAPI.XUnitTest\SEDCWebApplication.Tests.WebAPI.XUnitTest.csproj", "{882C109B-A106-4F5C-A926-4BF3C00D6DAE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D41AA7FF-41DE-4986-85EB-A9C9F0E0BE5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDCWebApplication.BLL.Logic.XUnitTest", "SEDCWebApplication.BLL.Logic.XUnitTest\SEDCWebApplication.BLL.Logic.XUnitTest.csproj", "{423DAC13-B9AD-4F4C-A550-415F1ED4038B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.BLL.Logic.XUnitTest", "SEDCWebApplication.BLL.Logic.XUnitTest\SEDCWebApplication.BLL.Logic.XUnitTest.csproj", "{423DAC13-B9AD-4F4C-A550-415F1ED4038B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{976C6D4B-B900-4B3C-8BD2-D770BDAAA349}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

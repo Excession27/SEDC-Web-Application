@@ -2,14 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SEDCWebApplication.BLL.Logic.Interfaces
 {
     public interface IEmployeeManager
     {
-        IEnumerable<EmployeeDTO> GetAllEmployees();
-        EmployeeDTO GetEmployeeById(int id);
-        EmployeeDTO Add(EmployeeDTO employee);
-        EmployeeDTO Update(EmployeeDTO employee);
+        Task<IEnumerable<EmployeeDTO>> GetAllEmployees();
+        Task<EmployeeDTO> GetEmployeeById(int id);
+        Task<EmployeeDTO> Add(EmployeeDTO employee);
+        Task<EmployeeDTO> Update(EmployeeDTO employee);
     }
 }

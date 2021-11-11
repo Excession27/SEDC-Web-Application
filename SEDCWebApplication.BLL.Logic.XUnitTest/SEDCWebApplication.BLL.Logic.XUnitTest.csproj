@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SEDCWebApplication.BLL.Logic\SEDCWebApplication.BLL.Logic.csproj" />
     <ProjectReference Include="..\SEDCWebApplication.DAL.EntityFactory\SEDCWebApplication.DAL.EntityFactory.csproj" />
+    <ProjectReference Include="..\SEDCWebApplication.Tests.WebAPI.XUnitTest\SEDCWebApplication.Tests.WebAPI.XUnitTest.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SEDCWebApplication.BLL.Logic.Interfaces
 {
     public interface IProductManager
     {
-        IEnumerable<ProductDTO> GetAllProducts();
-        ProductDTO GetProductById(int id);
-        ProductDTO Add(ProductDTO employee);
-        ProductDTO Update(ProductDTO employee);
-        string Delete(int id);
+        Task<IEnumerable<ProductDTO>> GetAllProducts();
+        Task<ProductDTO> GetProductById(int id);
+        Task<ProductDTO> Add(ProductDTO employee);
+        Task<ProductDTO> Update(ProductDTO employee);
+        Task<ProductDTO> Delete(int id);
     }
 }

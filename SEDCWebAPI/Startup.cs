@@ -31,12 +31,9 @@ using SEDCWebApplication.DAL.Data.Interfaces;*/
 
 // DAL EF DatabaseFactory
 using SEDCWebApplication.DAL.DatabaseFactory;
+using SEDCWebApplication.DAL.DatabaseFactory.GenericRepository;
 using SEDCWebApplication.DAL.DatabaseFactory.Implementations;
 using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
-
-
-using SEDCWebApplication.Models.Repositories.Implementations;
-using SEDCWebApplication.Models.Repositories.Interfaces;
 
 using System;
 using System.Collections.Generic;
@@ -68,13 +65,17 @@ namespace SEDCWebAPI
             services.AddAutoMapper(typeof(UserManager));
             services.AddAutoMapper(typeof(OrderManager));
 
-
-            services.AddScoped<IEmployeeRepository, DatabaseEmployeeRepository>();
+            
+/*            services.AddScoped<IEmployeeRepository, DatabaseEmployeeRepository>();
             services.AddScoped<ICustomerRepository, DatabaseCustomerRepository>();
             services.AddScoped<IProductRepository, DatabaseProductRepository>();
-            services.AddScoped<IOrderRepository, DatabaseOrderRepository>();
+            services.AddScoped<IOrderRepository, DatabaseOrderRepository>();*/
+            // IDataService treba ovde da se impelementira
+
             services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<>
+            services.AddScoped<IDataService, DataService>();
+
+
 
 
             //BLL
@@ -101,6 +102,8 @@ namespace SEDCWebAPI
             services.AddScoped<IProductDAL, ProductRepositoryDF>();
             services.AddScoped<IOrderDAL, OrderRepositoryDF>();
             services.AddScoped<IUserDAL, UserRepositoryDF>();
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             /*            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                         .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
@@ -182,7 +185,6 @@ namespace SEDCWebAPI
                        .AllowAnyHeader();
             }));
 
-            
 
         }
 
