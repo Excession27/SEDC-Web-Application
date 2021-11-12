@@ -16,6 +16,7 @@ using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
 using SEDCWebApplication.DAL.DatabaseFactory.Entities;
 using System.Threading.Tasks;
 
+
 namespace SEDCWebApplication.BLL.Logic.Implementations
 {
     public class ProductManager : IProductManager

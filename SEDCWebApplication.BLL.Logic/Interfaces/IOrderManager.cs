@@ -9,11 +9,11 @@ namespace SEDCWebApplication.BLL.Logic.Interfaces
 {
     public interface IOrderManager
     {
-        IEnumerable<OrderDTO> GetAllOrders();
-        IEnumerable<Order> GetPreviousOrders(int id);
-        OrderDTO GetOrderById(int id);
+        Task<IEnumerable<OrderDTO>> GetAllOrders();
+        Task<IEnumerable<OrderDTO>> GetPreviousOrders(int id);
+        Task<OrderDTO> GetOrderById(int id);
         Task<OrderDTO> Add(OrderDTO order);
-        string Delete(int id);
+        Task<OrderDTO> Delete(int id);
 
 
     }

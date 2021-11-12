@@ -54,7 +54,7 @@ namespace SEDCWebAPI.Controllers
         public async Task<IActionResult> GetPreviousOrders()
         {
             UserDTO user = (UserDTO)HttpContext.Items["User"];
-            IEnumerable<Order> previousOrders = await _dataService.GetPreviousOrders(user.UserId);
+            IEnumerable<OrderDTO> previousOrders = await _dataService.GetPreviousOrders(user.UserId);
             return Ok(previousOrders);
         }
 
@@ -83,7 +83,7 @@ namespace SEDCWebAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteOrder(int id)
         {
-            return _dataService.DeleteOrder(id);
+            return Ok(_dataService.DeleteOrder(id));
         }
     }
 }

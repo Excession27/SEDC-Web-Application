@@ -31,13 +31,13 @@ namespace SEDCWebAPI.Services.Interfaces
 
         Task<OrderDTO> AddOrder(OrderDTO order);
 
-        Task<IEnumerable<Order>> GetPreviousOrders(int id);
+        Task<IEnumerable<OrderDTO>> GetPreviousOrders(int id);
 
         Task<OrderDTO> GetOrderById(int id);
 
         Task<IEnumerable<OrderDTO>> GetAllOrders();
 
-        IActionResult DeleteOrder(int id);
+        Task<OrderDTO> DeleteOrder(int id);
 
         //                  Product
 

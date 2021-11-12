@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SEDCWebApplication.BLL.Logic.Implementations
 {
     public class OrderManager : IOrderManager
@@ -75,23 +76,24 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
             return orderDto;
         }
 
-        public IEnumerable<OrderDTO> GetAllOrders()
+        public async Task<IEnumerable<OrderDTO>> GetAllOrders()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<List<OrderDTO>>(await _orderDAL.GetAll(0, 50));
         }
 
-        public IEnumerable<Order> GetPreviousOrders(int id)
+        public async Task<IEnumerable<OrderDTO>> GetPreviousOrders(int id)
         {
-            return _mapper.Map<List<Order>>(_orderDAL.GetPreviousOrders(0, 50, id));
+            return _mapper.Map<List<OrderDTO>>(await _orderDAL.GetPreviousOrders(0, 50, id));
         }
 
-        public OrderDTO GetOrderById(int id)
+        public async Task<OrderDTO> GetOrderById(int id)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<OrderDTO>(await _orderDAL.GetById(id));
         }
 
-        public string Delete(int id)
+        public async Task<OrderDTO> Delete(int id)
         {
+            // return _mapper.Map<OrderDTO>(_orderDAL.Delete(id));
             throw new NotImplementedException();
         }
     }

@@ -72,8 +72,7 @@ namespace SEDCWebAPI
             services.AddScoped<IOrderRepository, DatabaseOrderRepository>();*/
             // IDataService treba ovde da se impelementira
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IDataService, DataService>();
+
 
 
 
@@ -105,13 +104,16 @@ namespace SEDCWebAPI
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-            /*            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                        .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-                        options =>
-                        {
-                            options.LoginPath = new PathString("/");
-                            options.AccessDeniedPath = new PathString("/auth/denied");
-                            });*/
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IDataService, DataService>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+            options =>
+            {
+                options.LoginPath = new PathString("/");
+                options.AccessDeniedPath = new PathString("/auth/denied");
+            });
 
 
             // configuration for JWT Authentication

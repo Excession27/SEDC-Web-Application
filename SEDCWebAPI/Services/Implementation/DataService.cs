@@ -55,13 +55,15 @@ namespace SEDCWebAPI.Services.Implementation
         {
             return await _employeeManager.Add(employee);
         }
+        public async Task<CustomerDTO> UpdateEmployee()
+        {
+            throw new NotImplementedException();
+        }
 
         public void DeleteEmployee(int id)
         {
             throw new NotImplementedException();
         }
-
-
 
 
 
@@ -83,10 +85,6 @@ namespace SEDCWebAPI.Services.Implementation
             return await _customerManager.Add(customer);
         }
 
-        public async Task<CustomerDTO> UpdateEmployee()
-        {
-            throw new NotImplementedException();
-        }
 
         public void DeleteCustomer(int id)
         {
@@ -98,36 +96,36 @@ namespace SEDCWebAPI.Services.Implementation
         //                  Order
 
 
-        public Task<OrderDTO> AddOrder(OrderDTO order)
+        public async Task<OrderDTO> AddOrder(OrderDTO order)
         {
-            throw new NotImplementedException();
+            return await _orderManager.Add(order);
         }
 
-        public Task<IEnumerable<Order>> GetPreviousOrders(int id)
+        public async Task<IEnumerable<OrderDTO>> GetPreviousOrders(int id)
         {
-            throw new NotImplementedException();
+            return await _orderManager.GetPreviousOrders(id);
         }
 
-        public Task<OrderDTO> GetOrderById(int id)
+        public async Task<OrderDTO> GetOrderById(int id)
         {
-            throw new NotImplementedException();
+            return await _orderManager.GetOrderById(id);
         }
 
-        public Task<IEnumerable<OrderDTO>> GetAllOrders()
+        public async Task<IEnumerable<OrderDTO>> GetAllOrders()
         {
-            throw new NotImplementedException();
+            return await _orderManager.GetAllOrders();
         }
 
-        public IActionResult DeleteOrder(int id)
+        public async Task<OrderDTO> DeleteOrder(int id)
         {
-            throw new NotImplementedException();
+            return await _orderManager.Delete(id);
         }
 
         //                  Product
 
         public async Task<IEnumerable<ProductDTO>> GetAllProducts()
         {
-            throw new NotImplementedException();
+            return await _productManager.GetAllProducts();
         }
 
         public async Task<ProductDTO> AddProduct(ProductDTO product)
