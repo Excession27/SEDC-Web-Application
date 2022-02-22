@@ -49,10 +49,6 @@ namespace SEDCWebApplication
             services.AddScoped<ICustomerManager, CustomerManager>();
             services.AddScoped<IProductManager, ProductManager>();
 
-            //DAL
-            //services.AddScoped<IEmployeeDAL, EmployeeDAL>();
-            //services.AddScoped<ICustomerDAL, CustomerDAL>();
-            //services.AddScoped<IProductDAL, ProductDAL>();
 
             // Database Factory
             services.AddScoped<SEDCWebApplication.DAL.DatabaseFactory.Interfaces.IEmployeeDAL, SEDCWebApplication.DAL.DatabaseFactory.Implementations.EmployeeRepositoryDF>();
@@ -72,14 +68,11 @@ namespace SEDCWebApplication
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                
                 app.UseHsts();
             }
 
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello from Middleware!");
-            //});
+
 
             app.Use(async (context, next) =>
             {
@@ -112,7 +105,7 @@ namespace SEDCWebApplication
 
                 endpoints.MapControllerRoute(
                     name: "test",
-                    pattern: "Test/{id}/{*name}",//Test/1/12/3
+                    pattern: "Test/{id}/{*name}", //Test/1/12/3
                     defaults: new { controller = "Home", action = "Privacy" });
             });
         }
